@@ -102,6 +102,44 @@
     \end{tcolorbox}
 \end{frame}
 \begin{frame}
+    \frametitle{Run Length Kodierung}
+    \begin{tcolorbox}[standard, title=Überblick]
+        \begin{itemize}
+            \item "Runs" von aufeinander folgenden Zeichen werden zusammengefasst
+            \item \textbf{Idee: Große Runs sparen viel Platz}
+        \end{itemize}
+    \end{tcolorbox}
+\end{frame}
+\begin{frame}
+    \frametitle{Run Length Kodierung}
+    \lstinputlisting{pseudo/run-length.pseudo}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Huffman Kodierung}
+    \begin{tcolorbox}[standard, title=Überblick]
+        \begin{itemize}
+            \item Relative häufigkeit der Zeichen wird betrachtet um eine Entropie-optimale Kodierungstabelle zu erstellen
+            \item Häufig auftretende Zeichen bekommen kleine Kodierungen
+            \item \textbf{Idee: Input wird so kodiert, dass die Länge tatsächlich von dem Informationsgehalt der Quelle abhängig ist}
+        \end{itemize}
+    \end{tcolorbox}
+\end{frame}
+\begin{frame}
+    \frametitle{Huffman Kodierung: Tabelle}
+    \lstinputlisting{pseudo/huffman-table.pseudo}
+\end{frame}
+\begin{frame}
+    \frametitle{Huffman Kodierung}
+    \lstinputlisting{pseudo/huffman.pseudo}
+\end{frame}
+\begin{frame}
+    \frametitle{Huffman Kodierung}
+    \lstinputlisting{pseudo/huffman-back.pseudo}
+\end{frame}
+
+\begin{frame}
     \frametitle{Move-to-Front Transform}
     \begin{tcolorbox}[standard, title=Überblick]
         \begin{itemize}
@@ -295,38 +333,9 @@
     \end{tcolorbox}
 \end{frame}
 \begin{frame}
-    \frametitle{Run Length Kodierung}
-    \begin{tcolorbox}[standard, title=Überblick]
-        \begin{itemize}
-            \item "Runs" von aufeinander folgenden Zeichen werden zusammengefasst
-            \item \textbf{Idee: Große Runs sparen viel Platz}
-        \end{itemize}
-    \end{tcolorbox}
-\end{frame}
-\begin{frame}
-    \frametitle{Run Length Kodierung}
-    \lstinputlisting{pseudo/run-length.pseudo}
-\end{frame}
-\begin{frame}
-    \frametitle{Huffman Kodierung}
-    \begin{tcolorbox}[standard, title=Überblick]
-        \begin{itemize}
-            \item Relative häufigkeit der Zeichen wird betrachtet um eine Entropie-optimale Kodierungstabelle zu erstellen
-            \item Häufig auftretende Zeichen bekommen kleine Kodierungen
-            \item \textbf{Idee: Input wird so kodiert, dass die Länge tatsächlich von dem Informationsgehalt der Quelle abhängig ist}
-        \end{itemize}
-    \end{tcolorbox}
-\end{frame}
-\begin{frame}
-    \frametitle{Huffman Kodierung: Tabelle}
-    \lstinputlisting{pseudo/huffman-table.pseudo}
-\end{frame}
-\begin{frame}
-    \frametitle{Huffman Kodierung}
-    \lstinputlisting{pseudo/huffman.pseudo}
-\end{frame}
-\begin{frame}
-    \frametitle{Huffman Kodierung}
-    \lstinputlisting{pseudo/huffman-back.pseudo}
+    \frametitle{~}
+    \begin{center}
+        \Large{\blue{\textbf{Vielen Dank fürs Zuhören!}}}
+    \end{center}
 \end{frame}
 \end{document}

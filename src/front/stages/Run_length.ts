@@ -101,7 +101,7 @@ export class RunLength {
             elements[index].style.color="red"; 
             elements[index].style.fontWeight = "bolder";
             this.elEncCounter.innerText = (parseInt(index) + 1) + "";
-            await sleep(200);
+            await sleep(150);
         }
         await sleep(200)
         for (const index in elements){
@@ -127,7 +127,7 @@ export class RunLength {
         firstEl.style.color = "blue";
         this.elEncCounter.style.color = "blue";
         this.elEncCounter.style.fontWeight = "bolder";
-        await sleep(800);
+        await sleep(600);
 
         let result = this.elEncResult.innerText;
         let counterEl = document.createElement("div");
@@ -140,7 +140,7 @@ export class RunLength {
         this.elEncCounter.innerText = "0";
         this.elEncCounter.style.color = "black";
         this.elEncCounter.style.fontWeight = "normal";
-        await sleep(800);
+        await sleep(500);
         
         let nextResult = result + counterEl.innerText + this.encInput[0] + " ";
         if (nextResult.length > 79) {
@@ -215,7 +215,7 @@ export class RunLength {
         elements[1].style.color = "red";
         elements[1].style.fontWeight = "bolder";
 
-        await sleep(800);
+        await sleep(500);
         let deltaLetter = 16.5;
         let newElements = [];
         for (let i = 0; i < count; i++){
@@ -235,10 +235,10 @@ export class RunLength {
 
         });
 
-        await sleep(1300);
+        await sleep(1000);
         this.elDecResult.innerHTML += `<div style="color: blue; font-weight: bold; display: inline-block">${letter.repeat(count)}</div>`;
         this.elDecInput.innerText = this.decSteps[0].input.replaceAll("©", " ");
-        await sleep(800);
+        await sleep(500);
         this.elDecResult.innerHTML = this.decSteps[0].output;
         this.decSteps.shift();
         this.decInput.shift();
