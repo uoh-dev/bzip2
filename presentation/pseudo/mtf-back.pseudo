@@ -1,0 +1,6 @@
+function inverse_mtf(A, input):
+    out $\leftarrow\epsilon$
+    for char_index in input:
+        out.append(A[0])
+        swap A[char_index] with A[0]
+    return out

@@ -1,0 +1,8 @@
+function mtf(input):
+    A[$|\Sigma|$] $\leftarrow\Sigma$
+    out $\leftarrow\epsilon$
+    for char in input:
+        char_index $\leftarrow$ A.indexOf(char)
+        out.append(char_index)
+        swap A[1] with A[char_index]
+    return A, out

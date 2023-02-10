@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top" style="padding-left: 20%;">
+        <div class="container-fluid justify-content-start">
+            <a class="navbar-brand fs-4 fw-bold" href="#">Bzip2</a>
+            <ul class="navbar-nav px-5">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="custom_order.html">Encode with Bzip2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Encoding stages</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="rowImg" class="row text-light sticky-top" style="height: 700px;">
+        <div id="car1" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+
+            <button id="c1" data-bs-slide-to="1"  data-bs-target="#car1" style="display: none;"></button>
+            <button id="c2" data-bs-slide-to="1"  data-bs-target="#car2" style="display: none;"></button>
+            
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row justify-content-center align-items-center" style="margin-top: 7%;">
+                        <div class="col-3 px-5 mx-5">
+                            <p class="fs-4">Enter text to encode with bzip2:</p>
+                            <textarea class="form-control" rows="10" id="textareaEnc"></textarea>
+                            <span style="float: right;" id="spanCountLetters">0</span>
+                            <br>
+                            <p class="fs-2 text-center">or</p>
+                            <input id="inputFile" name="input" type="file" class="form-control">
+                        </div>
+            
+            
+                        <div class="col-3 px-5 mx-5 content text-center text-dark">
+                            <p class="fs-4 text-start text-light">Change Encoding pipeline:</p>
+                            <div id="listEncPipeline" class="list-group col text-start mb-3">
+                                <div class="card-header filtered bg-light">
+                                    <button id="buttonDefault" type="button" class="btn btn-primary" style="font-size: medium;">Restore default</button>
+                                    <div class="dropdown" style="display: inline;">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEncodings" style="float: right;" data-bs-toggle="dropdown">
+                                            Add stages
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownEncodings">
+                                            <li><a id="dropRL" class="dropdown-item">Run-length encoding</a></li>
+                                            <li><a id="dropBWT" class="dropdown-item">Burrows-Wheeler transform</a></li>
+                                            <li><a id="dropMTF" class="dropdown-item">Move-to-front transform</a></li>
+                                            <li><a id="dropHM" class="dropdown-item">Huffman encoding</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="list-group-item item" enc_id="0">
+                                    Run-length encoding
+                                    <button id="encStage0" type="button" class="btn btn-danger btn-sm float-end d-inline-flex align-items-center" style="height: 24px;">x</button>
+                                </div>
+                                <div class="list-group-item item" enc_id="1">
+                                    Burrows-Wheeler transform
+                                    <button id="encStage1" type="button" class="btn btn-danger btn-sm float-end d-inline-flex align-items-center" style="height: 24px;">x</button>
+                                </div>
+                                <div class="list-group-item item" enc_id="2">
+                                    Move-to-front
+                                    <button id="encStage2" type="button" class="btn btn-danger btn-sm float-end d-inline-flex align-items-center" style="height: 24px;">x</button>
+                                </div>
+                                <div class="list-group-item item" enc_id="3">
+                                    Huffman coding
+                                    <button id="encStage3" type="button" class="btn btn-danger btn-sm float-end d-inline-flex align-items-center" style="height: 24px;">x</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item text-center" style="margin-top: 4%;">
+                    <span id="spanTitle" class="fs-2 fw-bold pb-5"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="car2" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div id="carInner" class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- Input forms to start encoding -->
+                <div class="d-flex justify-content-center align-items-center pb-5" style="margin-top:3%">
+                    <button id="buttonEncode" type="button" class="btn btn-primary btn-lg">Encode</button>
+                </div>
+                
+            </div>
+            <div id="car-content" class="carousel-item car-inner">
+                <div id="resultScreen" style="padding-bottom: 50px; margin-left: 15%; width:70%; margin-right: 15%;">
+                    <div class="d-flex justify-content-center">
+                        <table class="table table-striped table-bordered hm-table mt-3 fs-5" style="background-color: rgb(148, 222, 252); width: 40%;">
+                            <thead>
+                                <tr>
+                                  <th style="background-color: rgb(74, 201, 252);">Stages</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stageTable">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row justify-content-between mx-5">
+                        <div class="col-5">
+                            <span class="fs-3 fw-bold">Input</span>
+                            <table class="table table-striped table-bordered hm-table mt-3 fs-5 text-center" style="background-color: rgb(162, 186, 252);">
+                                <tbody id="inputStats">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-1 d-flex align-items-end justify-content-center">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="col-5">
+                            <span id="labelOutput" class="fs-3 fw-bold">Output</span>
+                            <table class="table table-striped table-bordered hm-table mt-3 fs-5 text-center" style="background-color: rgb(255, 202, 159);">
+                                <tbody id="outputStats">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
+                    <div class="row mx-5 mt-5 text-center">
+                        <span class="fs-3 fw-bold">Difference</span>
+                        <table class="table table-striped table-bordered hm-table fs-5 text-center table-success" style="margin-left: 25%; margin-right: 25%; width: 50%;">
+                            <tbody id="diffStats">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="margin-top:3%">
+                        <button id="buttonDownload" type="button" class="btn btn-danger btn-lg">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</body>
+<div id="customOrderPage" style="display: none;"></div>
+<script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
+<script src="build/bundle.js"></script>
+</html>

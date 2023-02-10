@@ -1,0 +1,9 @@
+function huffman_decode(table, input):
+    buffer $\leftarrow\epsilon$
+    out $\leftarrow\epsilon$
+    for char in input:
+        buffer.append(char)
+        if buffer in table:
+            out.append(table(buffer))
+            buffer $\leftarrow\epsilon$
+    return out

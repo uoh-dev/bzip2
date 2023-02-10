@@ -1,0 +1,176 @@
+body {
+    --bg: rgb(230, 232, 233);
+    --bg-accent: rgb(20, 80, 160);
+    --fg: #000;
+
+    background-color: var(--bg);
+    transition: background-color 0.4s ease-in-out;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#rowImg {
+    background-image: url('bg.jpg'); 
+    background-size: cover; 
+    background-color: rgba(0,0,0,0.85); 
+    background-blend-mode: darken; 
+    padding-bottom: 8%; 
+    height: 635px; 
+    transition: height 0.6s ease-in-out;
+}
+
+.nav-colored {
+    transition: 300ms ease;
+    background-color: var(--bg-accent);
+}
+
+.end {
+    color: blue;
+}
+
+.BWTresult {
+    color: red;
+    font-weight: bolder;
+}
+
+.letterMTF {
+    display: inline-block;
+    transition: color 500ms ease-in-out, font-weight 500ms ease-in-out, font-size 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
+.letterRL {
+    display: inline-block;
+    transition: transform 500ms ease-in-out;
+}
+
+.letterRLDec {
+    display: inline-block;
+    font-size: 30px;
+    transition: transform 500ms ease-in-out;
+}
+
+.exact {
+    white-space: pre-wrap; 
+    word-wrap:break-word;
+}
+
+.highlight {
+    color: red;
+    font-weight: bolder;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+.tree {
+    border: #000;
+    border-style: solid;
+    background-color: white;
+    width: 870px;
+    height: 620px;
+    display: block;
+}
+
+.RL {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    height: 210px;
+    background-color: rgb(209, 209, 250);
+    margin-bottom: 30px;
+}
+
+.resultBox {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    height: 300px;
+}
+
+.alphabet {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    height: 120px;
+    background-color: rgb(209, 209, 250);
+    margin-bottom: 30px;
+}
+
+.hm-table {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+}
+
+.hm-table tr {
+    line-height: 15.6px;
+    text-align: center;
+}
+
+
+.hm-highlight {
+    background-color: rgb(253, 148, 148) !important;
+}
+
+.hm-tree {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    height: 530px;
+    background-color: white;
+}
+
+.hm-result {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    display: none;
+    background-color: rgb(250, 247, 209);
+}
+
+.hm-input {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    height: 108px;
+    margin-bottom: 30px;
+}
+
+#idResultRow {
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 116px;
+}
+
+.car-inner {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    padding-top: 30px;
+    height: 730px;
+}
+
+.rotations {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    background-color: rgb(209, 209, 250);
+    margin-bottom: 20px;
+}
+
+.matrix {
+    border: #000;
+    border-style: solid;
+    border-width: 3px;
+    background-color: rgb(250, 247, 209);
+    width: 38%;
+}
+
+.charBorder {
+    border: #000;
+    background-color: aqua;
+}
+
+.swapping {
+    background-color: rgb(183, 255, 173);
+}
+/* body.alt {} */

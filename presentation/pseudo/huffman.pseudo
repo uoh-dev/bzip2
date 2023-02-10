@@ -1,0 +1,6 @@
+function huffman_encode(input):
+    table $\leftarrow$ huffman_table(input)
+    out $\leftarrow\epsilon$
+    for char in input:
+        out.append(table(char))
+    return table, out

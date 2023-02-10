@@ -1,0 +1,5 @@
+function run_length_decode(input):
+    out $\leftarrow\epsilon$
+    for (count, char) in input:
+        out.append(char * count)
+    return out

@@ -1,0 +1,6 @@
+function inverse_burrows_wheeler(input):
+    rotations[n, n]
+    for k in n..1:
+        rotations[1..n, k] $\leftarrow$ input
+        rotations.sort()
+    return rotation ending with $\text{\$}$

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top" style="padding-left: 20%;">
+        <div class="container-fluid justify-content-start">
+            <a class="navbar-brand fs-4 fw-bold" href="#">Bzip2</a>
+            <ul class="navbar-nav px-5">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="custom_order.html">Encode with Bzip2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Encoding stages</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div id="rowImg" class="row text-light sticky-top">
+        <div id="car1" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+
+            <button id="c1" data-bs-slide-to="1"  data-bs-target="#car1" style="display: none;"></button>
+            <button id="c2" data-bs-slide-to="1"  data-bs-target="#car2" style="display: none;"></button>
+            
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row justify-content-center align-items-center" style="margin-top: 7%;">
+                        <div class="col-3 px-5">
+                            <p class="fs-4">Enter text to encode:</p>
+                            <textarea class="form-control" rows="10" id="textareaEnc"></textarea>
+                            <span style="float: right;" id="spanCountLetters">0</span>
+                        </div>
+                        <div class="col-1 content text-center">
+                            <p class="fs-2 text-center">or</p>
+                        </div>
+                        <div class="col-3 px-5 content text-center text-dark">
+                            <input id="inputFile" type="file" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item text-center" style="margin-top: 4%;">
+                    <span id="spanTitle" class="fs-2 fw-bold pb-5"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Falls nach decode gefragt wird 
+    <input id="sicherFile" type="file" class="form-control">
+    <button id="sicherButton">click</button> -->
+
+    <div id="car2" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div id="carInner" class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- Input forms to start encoding -->
+                <div class="d-flex justify-content-center align-items-center pb-5" style="margin-top:3%">
+                    <button id="buttonEncode" type="button" class="btn btn-primary btn-lg mx-3" disabled>Encode</button>
+                    <select id="selectEnc" class="form-select" aria-label="select" style="width: 243px; height: 50px;">
+                        <option value="0" selected> Run-length encoding </option>
+                        <option value="1"> Burrows-Wheeler transform </option>
+                        <option value="2"> Move-to-front transform </option>
+                        <option value="3"> Huffman encoding </option>
+                    </select>
+                </div>
+            </div>
+            <div id="car-content" class="carousel-item car-inner">
+                <div id="divContent" class="">
+
+                </div>
+                <div class="text-center">
+                    <button id="btnFinish" type="button" class="btn btn-danger btn-lg px-4" style="display: none;">Finish</button>
+                </div> 
+            </div>
+        </div>
+        <div id="resultScreen" style="padding-top: 300px; padding-bottom: 50px; margin-left: 15%; width:70%; margin-right: 15%; display: none;">
+            <div class="row justify-content-between mx-5">
+                <div class="col-5">
+                    <span class="fs-3 fw-bold">Input</span>
+                    <div id="resultBoxInput" class="resultBox exact font-monospace fs-2 p-5" style="background-color: rgb(209, 209, 250);"></div>
+                    <table class="table table-striped table-bordered hm-table mt-3 fs-5 text-center" style="background-color: rgb(162, 186, 252);">
+                        <tbody id="inputStats">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="col-5">
+                    <span id="labelOutput" class="fs-3 fw-bold">Output</span>
+                    <div id="resultBoxOutput" class="resultBox exact font-monospace fs-2 p-5" style="background-color: rgb(250, 247, 209);"></div>
+                    <table class="table table-striped table-bordered hm-table mt-3 fs-5 text-center" style="background-color: rgb(255, 202, 159);">
+                        <tbody id="outputStats">
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+            <div class="row mx-5 mt-5 text-center">
+                <span class="fs-3 fw-bold">Difference</span>
+                <table class="table table-striped table-bordered hm-table fs-5 text-center table-success" style="margin-left: 25%; margin-right: 25%; width: 50%;">
+                    <tbody id="diffStats">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<div id="indexPage" style="display: none;"></div>
+<script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
+<script src="build/bundle.js"></script>
+</html>

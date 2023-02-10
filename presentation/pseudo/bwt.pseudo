@@ -1,0 +1,4 @@
+function burrows_wheeler(input):
+    rotations[n, n] $\leftarrow$ input.rotations()
+    rotations.sort()
+    return rotations[1..n, n]

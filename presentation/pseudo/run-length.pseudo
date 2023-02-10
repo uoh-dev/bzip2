@@ -1,0 +1,14 @@
+function run_length(input):
+    out $\leftarrow\epsilon$
+    counter $\leftarrow1$
+    run_char $\leftarrow$ input[1]
+    for i in 2..n:
+        if input[i-1] = input[i]:
+            counter++
+        else:
+            out.append(counter, run_char)
+            counter $\leftarrow$ 1
+            run_char $\leftarrow$ input[i]
+    out.append(counter)
+    out.append(run_char)
+    return out

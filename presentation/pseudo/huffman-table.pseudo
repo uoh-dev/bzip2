@@ -1,0 +1,15 @@
+function huffman_table(input):
+    table: string $\Rightarrow$ string
+    heap $\leftarrow$ MinHeap()
+    for char in input:
+        heap.insert(char, occurance(char))
+    root $\leftarrow$ {}
+    while heap.hasItem():
+        (char1, char1_occ) $\leftarrow$ heap.pop()
+        if heap.empty(): break
+        (char2, char2_occ) $\leftarrow$ heap.pop()
+        root $\leftarrow$ (char1_occ + char2_occ)
+        heap.insert(root)
+    for leaf in root:
+        table.map(leaf.path $\rightarrow$ leaf.char)
+    return table
