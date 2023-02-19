@@ -54,6 +54,8 @@
 \newcommand{\dunderline}[1]{\underline{\underline{#1}}}
 \newcommand{\reff}[2]{\hyperref[{#2}]{{#1}\ref*{#2}}}
 
+\newcommand{\para}{\par\null\par}
+
 
 \renewcommand{\labelenumi}{\alph{enumi})}
 \renewcommand{\labelenumii}{\roman{enumii})}
@@ -80,16 +82,55 @@
 \listoffigures
 \newpage
 \section{Was ist Bzip2?}
-\section{Was ist eine Enkodierung?}
+\vspace*{3cm}
+\section{Was ist eine Datenkompression?}
+Als Datenkompression wird ein Vorgang bezeichnet, bei dem Daten so verarbeitet werden, 
+dass sie mit weniger Bits darstellbar sind. Dabei kann die Kompression entweder 
+\texttt{verlustfrei} oder \texttt{verlustbehaftet} sein.
+\subsection{Verlustfreie und verlustbehaftete Kompressionen}
+Für eine Kompression $k: E \to A$, die eine Eingabe $E \in \{0,1\}^*$ in eine Ausgabe $A \in \{0,1\}^*$
+komprimiert, gilt:
+\[k \text{ ist \texttt{verlustfrei}} \Llr k \text{ ist invertierbar}.\]
+Bei \texttt{verlustfreien} Kompressionen wird also die Forderung gesetzt, dass die 
+komprimierte Ausgabe wieder in die originale Eingabe dekomprimiert werden~kann.
+\para
+Dass eine Kompression verlustbehaftet ist, ist nicht immer schlimm. Wichtig ist hierbei nur, 
+dass die verlorene Information für den Menschen nicht erkennbar oder zumindest 
+vernachlässigbar ist. So kann zum Beispiel bei einem Bild das Farbspektrum 
+verkleinert werden, ohne dass das menschliche Auge einen Unterschied bemerkt.
+\begin{figure}[H]
+    \centering
+    \includegraphics*[width=0.5\textwidth]{images/verlustbehaftet-bild.png}
+    \caption[Verlustbehaftete Kompression eines Bildes]{
+        Ein Bild, welches mit dem JPEG-Verfahren komprimiert~wurde.
+    }
+\end{figure}
+In Texten hingegen können schon kleine Informationsverluste dafür sorgen, 
+dass diese nicht mehr lesbar sind.
+\newpage
+\subsection{Entropiekodierungen und Substitiutionskompressionen}
+Bei verlustfreien Kompressionen unterscheidet man grundsätzlich zwischen den
+\texttt{Entropiekodierungen} und \texttt{Substitiutionskompressionen}.
+\para
+\texttt{Entropiekodierungen} errechnen für die Zeichen $z \in \Sigma$ einer Eingabe einen Code 
+\[c: \Sigma \to \bigcup\limits_{n\geq1} \{0,1\}^n.\]
+Ziel des Codes ist es, eine Ausgabe mit kleinerer durchschnittlicher Codel\"ange, 
+als die der Eingabe zu erzeugen, indem häufig auftretende Zeichen 
+kürzeren Codes und seltene Zeichen längeren Codes zugewiesen werden.
+Die Huffman -und arithmetische Kodierung sind Beispiele von Entropiekodierungen.
+\para
+\texttt{Substitiutionskompressionen} hingegen versuchen, oft wiederholende Zeichenfolgen 
+zusammenzufassen und somit Redundanz in der Eingabe zu eliminieren. Bekannte Vertreter
+sind hier das LZ77 Verfahren und das im folgenden Abschnit analysierte Run-Length Verfahren.
 \newpage
 \section{Run-length encoding}
-\subsection{Enkodierung}
+\subsection{Kodierung}
 \subsubsection{Implementierung}
 \subsection{Dekodierung}
 \subsubsection{Implementierung}
 \newpage
 \section{Huffman encoding}
-\subsection{Enkodierung}
+\subsection{Kodierung}
 \subsubsection{Implementierung}
 \subsection{Dekodierung}
 \subsubsection{Implementierung}
