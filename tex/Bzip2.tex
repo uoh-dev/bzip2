@@ -1,0 +1,113 @@
+\documentclass{article}
+%\usepackage[margin=1.3in]{geometry}
+\usepackage[margin=1.84in, top=4cm]{geometry}
+
+\date{Abgabe: \today}
+\author{Florian Brohm, 7443251 \and Toprak Saricerci, 7445073}
+
+\title{Seminar: Datenkompression\\Bzip2}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{wasysym}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[ngerman]{babel}
+%\usepackage{changepage}
+%\usepackage[thinc]{esdiff}
+%\usepackage[makeroom]{cancel}
+%\usepackage{pdfpages}
+
+%\usepackage{tikz}
+%\usepackage{listings}
+%\usepackage{tabularx}
+\usepackage{float}
+\usepackage[font=small]{caption}
+
+%\usetikzlibrary{arrows,automata}
+
+\usepackage[sorting=none]{biblatex}
+\addbibresource{quellen.bib}
+
+\newcommand{\bla}{\bigwedge\limits}
+\newcommand{\blo}{\bigvee\limits}
+
+\newcommand{\la}{\land}
+\newcommand{\lo}{\lor}
+\newcommand{\lr}{\rightarrow}
+\newcommand{\llr}{\leftrightarrow}
+\newcommand{\Llr}{\Leftrightarrow}
+\newcommand{\lp}{\oplus}
+\newcommand{\p}{\text{potenz}}
+\newcommand{\R}{\Rightarrow}
+\newcommand{\n}[1]{\overline{{#1}}}
+\newcommand{\bb}[1]{\mathbb{{#1}}}
+
+\newcommand{\step}[1]{&& \left|\ {#1} \right.}
+\newcommand{\e}[2]{{#1}\cdot 10^{{#2}}}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\quelle}{\red{quelle }}
+\newcommand{\todo}{\red{todo }}
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+\newcommand{\reff}[2]{\hyperref[{#2}]{{#1}\ref*{#2}}}
+
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+\renewcommand{\labelenumii}{\roman{enumii})}
+\setlength\parindent{0pt}
+
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	linkcolor={blue},
+	urlcolor={red}, 
+    citecolor={blue}
+}
+
+\begin{document}
+\maketitle
+\newpage
+
+{
+    \hypersetup{linkcolor=blue}
+    \tableofcontents
+}
+\listoftables
+\listoffigures
+\newpage
+\section{Was ist Bzip2?}
+\section{Was ist eine Enkodierung?}
+\newpage
+\section{Run-length encoding}
+\subsection{Enkodierung}
+\subsubsection{Implementierung}
+\subsection{Dekodierung}
+\subsubsection{Implementierung}
+\newpage
+\section{Huffman encoding}
+\subsection{Enkodierung}
+\subsubsection{Implementierung}
+\subsection{Dekodierung}
+\subsubsection{Implementierung}
+\newpage
+\section{Was ist eine Transformation?}
+\section{Move-to-front transform}
+\subsection{Transformation}
+\subsubsection{Implementierung}
+\subsection{Inverse Transformation}
+\subsubsection{Implementierung}
+\newpage
+\section{Burrows-Wheeler transform}
+\subsection{Transformation}
+\subsubsection{Implementierung}
+\subsection{Inverse Transformation}
+\subsubsection{Implementierung}
+\newpage
+\section{Ergebnisse}
+\subsection{Einfluss der Schritte auf die Kompression}
+\printbibliography[heading=bibintoc]
+\end{document}
