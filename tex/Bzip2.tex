@@ -21,7 +21,7 @@
 %\usepackage{pdfpages}
 
 %\usepackage{tikz}
-%\usepackage{listings}
+\usepackage{listings}
 %\usepackage{tabularx}
 \usepackage{float}
 \usepackage[font=small]{caption}
@@ -56,7 +56,7 @@
 
 \newcommand{\para}{\par\null\par}
 \setlength\parindent{0pt}
-
+\lstset{mathescape=true}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -95,14 +95,14 @@ vernachlässigbar ist. So kann zum Beispiel bei einem Bild das Farbspektrum
 verkleinert werden, ohne dass das menschliche Auge einen Unterschied bemerkt.
 \begin{figure}[H]
     \centering
-    \includegraphics*[width=0.5\textwidth]{images/verlustbehaftet-bild.png}
+    \includegraphics*[width=0.5\textwidth]{images/jpeg.jpg}
     \caption[Verlustbehaftete Kompression eines Bildes]{
-        Ein Bild, welches mit dem JPEG-Verfahren komprimiert~wurde.
+        Ein Bild, welches mit dem mit dem verlustbehafteten JPEG-Verfahren komprimiert~wurde (rechts), 
+        sodass Kompressionsartefakte zu erkennen sind \cite*{jpeg}.
     }
 \end{figure}
 In Texten hingegen können schon kleine Informationsverluste dafür sorgen, 
 dass diese nicht mehr lesbar sind.
-\newpage
 \subsection{Entropiekodierungen und Substitiutionskompressionen}
 Bei verlustfreien Kompressionen unterscheidet man grundsätzlich zwischen den
 \texttt{Entropiekodierungen} und \texttt{Substitiutionskompressionen}.
@@ -133,7 +133,6 @@ zu $x^n$ umgeformt, wonach der Algorithmus mit $w$ fortführt. Folgendes ist ein
 \begin{center}
     \red{2j}1k6i3k $\R$ jj\red{1k}6i3k $\R$ jjk\red{6i}3k $\R$ jjkiiiiii\red{3k} $\R$ jjkiiiiiikkk
 \end{center}
-\newpage
 \subsection{Effizienz}
 Solange die Eingabe viele sich wiederholende Zeichenfolgen enthält, ist die Run-Length 
 Kodierung sehr effektiv. Falls aber nicht, kann die Kompression sogar zu einem größeren 
@@ -149,7 +148,7 @@ werden kann. Wenn das Byte auf einem ungeraden Index ist, handelt es sich bei di
 um einen Counterbyte und ansonsten um ein Zeichenbyte.
 \begin{figure}[H]
     \centering
-    \includegraphics*[width=0.3\textwidth]{images/verlustbehaftet-bild.png}
+    \includegraphics*[width=0.8\textwidth]{images/bytesteps.png}
     \caption[Counter -und Zeichenbytes beim Run-Length]{
         Counter -und Zeichenbytes beim Run-Length nach obiger Variante
     }
@@ -159,7 +158,10 @@ Außerdem gibt es eine Variante von Run-Length, die zum Beispiel nur Zeichenwied
 zusammenfasst, um die mögliche Verdopplung des Platzverbrauchs zu verhindern. 
 \textsf{abab}$\dots$ würde dann nicht verändert werden, da alle Zeichenwiederholungen die Länge 1 haben.
 So ist es aber nicht mehr einfach möglich, Counter von Zeichen zu unterscheiden.
-\subsection{Pseudocode \todo}
+\subsection{Pseudocode Kodierung}
+\lstinputlisting{pseudo/run-length.pseudo}
+\subsection{Pseudocode Dekodierung}
+\lstinputlisting{pseudo/run-length-back.pseudo}
 \newpage
 \section{Huffman encoding}
 Die Huffman-Kodierung ist ein klassisches Beispiel einer Entropiekodierung.
@@ -210,7 +212,17 @@ Eingabe mit weniger als 1000 Zeichen überhaupt nicht, da die Tabellengröße ei
 Anteil der Gesamtgröße ausmacht.
 Erst bei einer sehr großen Anzahl an Zeichen, z.B. 100000 ist die Tabellengröße 
 vernachlässigbar. 
-\subsection{Pseudocode \todo}
+\subsection{Pseudocode}
+Da im 3. Schritt der Kodierung immer die Kinder mit der kleinsten relativen Häufigkeit
+gesucht werden, eignet sich ein Min-Heap als Datenstruktur für eine schnelle Suche.
+\subsubsection{Tabellengenerierung}
+\lstinputlisting{pseudo/huffman-table.pseudo}
+\newpage
+\subsubsection{Kodierung}
+\lstinputlisting{pseudo/huffman.pseudo}
+\subsubsection{Dekodierung}
+\lstinputlisting{pseudo/huffman-back.pseudo}
+
 \newpage
 \section{Transformation}
 \subsection{Was ist eine Transformation?}
