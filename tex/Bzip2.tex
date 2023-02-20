@@ -158,9 +158,9 @@ zusammenfasst, um die mögliche Verdopplung des Platzverbrauchs zu verhindern.
 \textsf{abab}$\dots$ würde dann nicht verändert werden, da alle Zeichenwiederholungen die Länge 1 haben.
 So ist es aber nicht mehr einfach möglich, Counter von Zeichen zu unterscheiden.
 \subsection{Pseudocode Kodierung}
-\lstinputlisting{pseudo/run-length.pseudo}
+\lstinputlisting{../presentation/pseudo/run-length.pseudo}
 \subsection{Pseudocode Dekodierung}
-\lstinputlisting{pseudo/run-length-back.pseudo}
+\lstinputlisting{../presentation/pseudo/run-length-back.pseudo}
 \newpage
 \section{Huffman encoding}
 Die Huffman-Kodierung ist ein klassisches Beispiel einer Entropiekodierung.
@@ -215,12 +215,12 @@ vernachlässigbar.
 Da im 3. Schritt der Kodierung immer die Kinder mit der kleinsten relativen Häufigkeit
 gesucht werden, eignet sich ein Min-Heap als Datenstruktur für eine schnelle Suche.
 \subsubsection{Tabellengenerierung}
-\lstinputlisting{pseudo/huffman-table.pseudo}
+\lstinputlisting{../presentation/pseudo/huffman-table.pseudo}
 \newpage
 \subsubsection{Kodierung}
-\lstinputlisting{pseudo/huffman.pseudo}
+\lstinputlisting{../presentation/pseudo/huffman.pseudo}
 \subsubsection{Dekodierung}
-\lstinputlisting{pseudo/huffman-back.pseudo}
+\lstinputlisting{../presentation/pseudo/huffman-back.pseudo}
 
 \newpage
 \section{Transformation}
@@ -271,44 +271,39 @@ Wir definieren die Hilfsfunktion $t_{\text{MTF}}$:
 \begin{equation}
 \begin{split}
     &t_{\text{MTF}}:\Sigma^n\times\Sigma\rightarrow\Sigma^n\times\Sigma,\\
-    &t_{\text{MTF}}(A,\sigma):=(A(1\stackrel{\text{Tausch}}{\Leftrightarrow}i),i),~i=\text{Index von}~\sigma~\text{in}~A
+    &t_{\text{MTF}}(A,\sigma):=(A_i\circ(A\setminus A_i),i),~i=\text{Index von}~\sigma~\text{in}~A
 \end{split}
 \end{equation}
-$t_{\text{MTF}}$ beschreibt einen Schritt des MTF-Algorithmus. Für ein Zeichen $\sigma\in\Sigma$ der Eingabe wird zunächst dessen Index in $A$ in die Ausgabe geschrieben. Anschließend wird $A_1$ mit $A_i$ getauscht.
+$t_{\text{MTF}}$ beschreibt einen Schritt des MTF-Algorithmus. Für ein Zeichen $\sigma\in\Sigma$ der Eingabe wird zunächst dessen Index in $A$ in die Ausgabe geschrieben. Anschließend wird das Zeichen vorne an $A$ gehängt.
 \\[.5cm]
 Mithilfe von $t_{\text{MTF}}$ lässt sich MTF nun definieren.
 \begin{equation}
 \begin{split}
-    \text{MTF}:\Sigma^n\times\Sigma^*\rightarrow~&\Sigma^n\times\Sigma^*\\
-    \text{MTF}(A,w):=~&(A^{(k)},i\circ w')\\
+    \text{MTF}_A:\Sigma^*\rightarrow~&\Sigma^*\\
+    w^{\text{MTF}_A}:=~&i\circ w'\\
     \text{mit}~&(A',i)=t_{\text{MTF}}(A,w_1)\\
-    &(A^{(k)},w')=\text{MTF}(A',(w_2,..,w_k))\\
-    \\
-    \text{MTF}(A,\epsilon):=~&(A,\epsilon)
+    &w'=(w_2,..,w_k)^{\text{MTF}_{A'}}
 \end{split}
 \end{equation}
-$A^{(k)}$ ist für die Invertierung wichtig, daher muss diese an die Ausgabe gehängt werden.
-\newpage
 \subsection{Inverse Transformation}
-Für die Invertierung drehen wir den Algorithmus um. Zunächst definieren wir die Umkehrfunktion zu $t_{\text{MTF}}$.
+Die Invertierung der MTF ist trivial, da gilt
 \begin{equation}
-\begin{split}
-    &t^{-1}_{\text{MTF}}:\Sigma^n\times\Sigma\rightarrow\Sigma^n\times\Sigma\\
-    &t^{-1}_{\text{MTF}}(A,i):=(A(i\stackrel{\text{Tausch}}{\Leftrightarrow}1),A_i)
-\end{split}
-\end{equation}
-So können wir nun auch $\text{MTF}^{-1}$ definieren. Diese geht, anders als MTF, von rechts nach links (rückwärts) durch die Eingabe.
-\begin{equation}
-\begin{split}
-    \text{MTF}^{-1}:\Sigma^n\times\Sigma^*\rightarrow~&\Sigma^n\times\Sigma^*\\
-    \text{MTF}^{-1}(A^{(k)},w):=~&(A,w'\circ\sigma)\\
-    \text{mit}~&(A^{(k-1)},\sigma)=t^{-1}_{\text{MTF}}(A^{(k)},w_k)\\
-    &(A,w')=MTF^{-1}(A^{(k-1)},(w_1,..,w_{k-1}))
-\end{split}
+    \text{MTF}_A^{-1}=\text{MTF}_A
 \end{equation}
 \newpage
 \section{Burrows-Wheeler transform}
-\subsection{Transformation}
+\subsection{Erläuterung}
+BWT ist eine Transformation, welche die durchschnittliche Run-Length in der Eingabe erhöht. Dazu wird die lexikographische Rangfolge der Zeichen in betracht gezogen.
+\\[.5cm]
+Sei $w\in\Sigma^*$ mit $|w|=n$. Wir definieren die $i$-te Rotation von $w$ für $1\leq i\leq n$ folgendermaßen.
+\begin{equation}
+    w^{\gamma_i}:=(w_i,..,w_n,w_1,..,w_{i-1})
+\end{equation}
+Ferner definieren wir die Menge aller Rotationen
+\begin{equation}
+    w^\gamma:=\{w^{\gamma_i}:1\leq i\leq n\}
+\end{equation}
+
 \subsubsection{Implementierung}
 \subsection{Inverse Transformation}
 \subsubsection{Implementierung}
