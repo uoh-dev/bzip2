@@ -123,11 +123,22 @@ Die Huffman -und arithmetische Kodierung sind Beispiele von Entropiekodierungen.
 zusammenzufassen und somit Redundanz in der Eingabe zu eliminieren. Bekannte Vertreter
 sind hier das LZ77 Verfahren und das im folgenden Abschnit analysierte Run-Length Verfahren.
 \newpage
-\section{Run-length encoding}
+\section{Run-length encoding} 
+Die Run-Length Kodierung ist eine Substitiutionskompression, bei der sich wiederholende
+Zeichenfolgen zusammengefasst werden.
 \subsection{Kodierung}
-\subsubsection{Implementierung}
+Sei $aw \in \Sigma^*$ die Eingabe, wobei $a = x^n,~x\in \Sigma$ eine
+sich wiederholende Zeichenfolge der Länge $n$ ist. Das Teilwort $a$ wird zu $nx$ umgeformt, 
+wonach der Algorithmus mit $w$ fortführt. Folgendes ist ein Beispiel der Kodierung:
+\begin{center}
+    \red{jjjjjjj}kkijjj $\R$ 7j\red{kk}ijjj $\R$ 7j2k\red{i}jjj $\R$ 7j2k1i\red{jjj} $\R$ 7j2k1i3j
+\end{center}
 \subsection{Dekodierung}
-\subsubsection{Implementierung}
+Sei $nxw$ mit $n\in \bb{N},~x\in\Sigma$ und $w\in(\bb{N}\cup\Sigma)^*$ die Eingabe. Das Teilwort $nx$ wird
+zu $x^n$ umgeformt, wonach der Algorithmus mit $w$ fortführt. Folgendes ist ein Beispiel der Kodierung:
+\begin{center}
+    \red{2j}1k6i3k $\R$ jj\red{1k}6i3k $\R$ jjk\red{6i}3k $\R$ jjkiiiiii\red{3k} $\R$ jjkiiiiiikkk
+\end{center}
 \newpage
 \section{Huffman encoding}
 \subsection{Kodierung}
