@@ -33,7 +33,6 @@
 
 \newcommand{\bla}{\bigwedge\limits}
 \newcommand{\blo}{\bigvee\limits}
-
 \newcommand{\la}{\land}
 \newcommand{\lo}{\lor}
 \newcommand{\lr}{\rightarrow}
@@ -179,10 +178,54 @@ Wir stellen die Forderung, dass eine Transformation invertierbar sein muss, um f
 \[T^{-1}:~\Sigma'^*\rightarrow\Sigma^*,~w=\bigl(w^T\bigr)^{T^{-1}}\]
 Jetzt gilt es nur noch, tatsächlich nützliche Transformationen zu finden und anzuwenden.
 \section{Move-to-front transform}
-\subsection{Transformation}
-\subsubsection{Implementierung}
+\subsection{Erläuterung}
+MTF ist eine Transformation, welche Zeichen der Eingabe auf deren Index in einer Liste ''neulich genutzter'' Zeichen abbildet.
+\\[.5cm]
+Sei $\Sigma$ das Eingabealphabet mit $|\Sigma|=n$. Wir initialisieren die Liste $A(1..n)$ folgendermaßen.
+\begin{equation}
+    A_{1..n}=(\sigma_1,..,\sigma_n),~\sigma_1,..,\sigma_n\in\Sigma~\text{paarweise Verschieden}
+\end{equation}
+$A$ enthält initial das gesamte Alphabet, per konvention lexikographisch sortiert.
+\\[.5cm]
+Wir definieren die Hilfsfunktion $t_{\text{MTF}}$:
+\begin{equation}
+\begin{split}
+    &t_{\text{MTF}}:\Sigma^n\times\Sigma\rightarrow\Sigma^n\times\Sigma,\\
+    &t_{\text{MTF}}(A,\sigma):=(A(1\stackrel{\text{Tausch}}{\Leftrightarrow}i),i),~i=\text{Index von}~\sigma~\text{in}~A
+\end{split}
+\end{equation}
+$t_{\text{MTF}}$ beschreibt einen Schritt des MTF-Algorithmus. Für ein Zeichen $\sigma\in\Sigma$ der Eingabe wird zunächst dessen Index in $A$ in die Ausgabe geschrieben. Anschließend wird $A_1$ mit $A_i$ getauscht.
+\\[.5cm]
+Mithilfe von $t_{\text{MTF}}$ lässt sich MTF nun definieren.
+\begin{equation}
+\begin{split}
+    \text{MTF}:\Sigma^n\times\Sigma^*\rightarrow~&\Sigma^n\times\Sigma^*\\
+    \text{MTF}(A,w):=~&(A^{(k)},i\circ w')\\
+    \text{mit}~&(A',i)=t_{\text{MTF}}(A,w_1)\\
+    &(A^{(k)},w')=\text{MTF}(A',(w_2,..,w_k))\\
+    \\
+    \text{MTF}(A,\epsilon):=~&(A,\epsilon)
+\end{split}
+\end{equation}
+$A^{(k)}$ ist für die Invertierung wichtig, daher muss diese an die Ausgabe gehängt werden.
+\newpage
 \subsection{Inverse Transformation}
-\subsubsection{Implementierung}
+Für die Invertierung drehen wir den Algorithmus um. Zunächst definieren wir die Umkehrfunktion zu $t_{\text{MTF}}$.
+\begin{equation}
+\begin{split}
+    &t^{-1}_{\text{MTF}}:\Sigma^n\times\Sigma\rightarrow\Sigma^n\times\Sigma\\
+    &t^{-1}_{\text{MTF}}(A,i):=(A(i\stackrel{\text{Tausch}}{\Leftrightarrow}1),A_i)
+\end{split}
+\end{equation}
+So können wir nun auch $\text{MTF}^{-1}$ definieren. Diese geht, anders als MTF, von rechts nach links (rückwärts) durch die Eingabe.
+\begin{equation}
+\begin{split}
+    \text{MTF}^{-1}:\Sigma^n\times\Sigma^*\rightarrow~&\Sigma^n\times\Sigma^*\\
+    \text{MTF}^{-1}(A^{(k)},w):=~&(A,w'\circ\sigma)\\
+    \text{mit}~&(A^{(k-1)},\sigma)=t^{-1}_{\text{MTF}}(A^{(k)},w_k)\\
+    &(A,w')=MTF^{-1}(A^{(k-1)},(w_1,..,w_{k-1}))
+\end{split}
+\end{equation}
 \newpage
 \section{Burrows-Wheeler transform}
 \subsection{Transformation}
