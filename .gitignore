@@ -2,3 +2,4 @@ build/
 .vscode/
 node_modules/
 presentation/.aux/
+tex/.aux/
