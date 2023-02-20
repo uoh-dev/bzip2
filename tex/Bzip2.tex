@@ -106,16 +106,15 @@ dass diese nicht mehr lesbar sind.
 Bei verlustfreien Kompressionen unterscheidet man grundsätzlich zwischen den
 \texttt{Entropiekodierungen} und \texttt{Substitiutionskompressionen}.
 \para
-\texttt{Entropiekodierungen} errechnen für die Zeichen $z \in \Sigma$ einer Eingabe einen Code 
-\[c: \Sigma \to \bigcup\limits_{n\geq1} \{0,1\}^n.\]
-Ziel des Codes ist es, eine Ausgabe mit kleinerer durchschnittlicher Codel\"ange, 
-als die der Eingabe zu erzeugen, indem häufig auftretende Zeichen 
-kürzeren Codes und seltene Zeichen längeren Codes zugewiesen werden.
-Die Huffman -und arithmetische Kodierung sind Beispiele von Entropiekodierungen.
-\para
-\texttt{Substitiutionskompressionen} hingegen versuchen, oft wiederholende Zeichenfolgen 
-zusammenzufassen und somit Redundanz in der Eingabe zu eliminieren. Bekannte Vertreter
+\texttt{Substitiutionskompressionen} versuchen, oft wiederholende Zeichenfolgen 
+zusammenzufassen oder Muster und somit Redundanz in der Eingabe zu eliminieren. Bekannte Vertreter
 sind hier das LZ77 Verfahren und das im folgenden Abschnit analysierte Run-Length Verfahren.
+\para
+\texttt{Entropiekodierungen} arbeiten im Gegensatz zu Substitiutionskompressionen nicht 
+mit Zeichenfolgen oder Mustern in der Eingabe, sondern mit den relativen Häufigkeiten
+der einzelnen Zeichen. Dabei ist das Ziel, dass häufig auftretende Zeichen weniger
+Bits zur Folge haben und seltene Zeichen mehr Bits.
+Die Huffman -und arithmetische Kodierung sind Beispiele von Entropiekodierungen.
 \section{Run-Length encoding} 
 Die Run-Length Kodierung ist eine Substitiutionskompression, bei der sich wiederholende
 Zeichenfolgen zusammengefasst werden.
@@ -157,18 +156,19 @@ Außerdem gibt es eine Variante von Run-Length, die zum Beispiel nur Zeichenwied
 zusammenfasst, um die mögliche Verdopplung des Platzverbrauchs zu verhindern. 
 \textsf{abab}$\dots$ würde dann nicht verändert werden, da alle Zeichenwiederholungen die Länge 1 haben.
 So ist es aber nicht mehr einfach möglich, Counter von Zeichen zu unterscheiden.
-\subsection{Pseudocode Kodierung}
+\subsection{Pseudocode}
+\subsubsection{Kodierung}
 \lstinputlisting{../presentation/pseudo/run-length.pseudo}
-\subsection{Pseudocode Dekodierung}
+\subsubsection{Dekodierung}
 \lstinputlisting{../presentation/pseudo/run-length-back.pseudo}
 \newpage
 \section{Huffman encoding}
-Die Huffman-Kodierung ist ein klassisches Beispiel einer Entropiekodierung.
-\subsection{Idee}
-Die Huffman-Kodierung berechnet die relative Häufigkeit jedes Zeichens und 
-gibt Zeichen mit hoher relativer Häufigkeit kürzere Codes und Zeichen mit kürzerer
+Die Huffman-Kodierung errechnet für Zeichen $z \in \Sigma$ einer Eingabe einen Code 
+\[c: \Sigma \to \bigcup\limits_{n\geq1} \{0,1\}^n.\]
+Dafür zählt die Kodierung die relative Häufigkeit jedes Zeichens und 
+gibt Zeichen mit hoher relativer Häufigkeit kürzere Codes und Zeichen mit kleinerer relativer Häufigkeit
 entsprechend längere Kodes. Bei Eingaben mit ungleichen Häufigkeitsverteilungen machen
-einige wenige Zeichen den Großteil der Eingabe aus, sodass dementsprechend ein Großteil
+einige wenige Zeichen den Großteil der Eingabe aus, sodass ein Großteil
 der Zeichen kurze Codes hat, was eine kleine durchschnittliche Codelänge und
 somit große Platzeinsparungen zur Folge hat.
 \subsection{Präfixfreiheit}
