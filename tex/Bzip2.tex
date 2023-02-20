@@ -146,7 +146,38 @@ zu $x^n$ umgeformt, wonach der Algorithmus mit $w$ fortführt. Folgendes ist ein
 \subsection{Dekodierung}
 \subsubsection{Implementierung}
 \newpage
-\section{Was ist eine Transformation?}
+\section{Transformation}
+\subsection{Was ist eine Transformation?}
+Transformationen sind Funktionen auf einer Menge von Eingabewörtern $\Sigma^*$, welche diese auf eine, oft gleiche, Menge von Ausgabewörtern $\Sigma'^{*}$ abbildet. Die Eingabe und das Ergebnis sind dabei jedoch gleich lang.
+\\[.5cm]
+Sei $T$ eine Transformation mit
+\begin{equation}
+    T:~\Sigma^*\rightarrow\Sigma'^*,~w\mapsto T(w)
+\end{equation}
+Die Anwendung einer Transformation wird im folgenden für ein Wort $w\in\Sigma^*$ gekürzt beschrieben.
+\begin{equation}
+    w^T:=T(w)
+\end{equation}
+Aus der oben genannten Definition folgt
+\begin{equation}
+    |w^T|=|w|
+\end{equation}
+Beispiele simpler Transformationen:
+\begin{align*}
+    abcd~&\stackrel{R}{\rightarrow}~dcba~~\text{(Umkehrung)}\\
+    dbca~&\stackrel{\text{sort}}{\rightarrow}~abcd~~\text{(Lexikographische Sortierung)}\\
+    abcd~&\stackrel{0}{\rightarrow}~0000~~\text{(Nulling)}
+\end{align*}
+Man beobachte: die Permutation ist ein Spezialfall der Transformation.
+\subsection{Warum sind Transformationen nützlich?}
+Das Ziel der Datenkompression ist logischerweise das Einsparen von Speicherplatz.
+Wenn jedoch die Länge der Ausgabe einer Transformation der Länge der Eingabe gleicht, wozu benötigen wir sie dann?
+\\[.5cm]
+Transformationen können benutzt werden, um Eingaben in eine für eine Kodierung (o.Ä.) günstige Form zu bringen. Dies steigert die Effizienz der Kodierung und spart somit mehr Speicherplatz.
+\\[.5cm]
+Wir stellen die Forderung, dass eine Transformation invertierbar sein muss, um für (verlustfreie) Datenkompression nützlich zu sein. Die Umkehrfunktion einer Transformation $T$ wird wie folgt definiert.
+\[T^{-1}:~\Sigma'^*\rightarrow\Sigma^*,~w=\bigl(w^T\bigr)^{T^{-1}}\]
+Jetzt gilt es nur noch, tatsächlich nützliche Transformationen zu finden und anzuwenden.
 \section{Move-to-front transform}
 \subsection{Transformation}
 \subsubsection{Implementierung}
