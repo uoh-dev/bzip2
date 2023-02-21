@@ -76,6 +76,19 @@
 \listoffigures
 \newpage
 \section{Was ist Bzip2?}
+\begin{itemize}
+    \item Verlustfreies Datenkompressionsverfahren
+    \item Ähnlich zu ZIP
+    \item Basiert auf Burrows-Wheeler transform
+    \item Autor: Julian Seward
+    \item Veröffentlichung: 18. Juli 1996
+    \item Verwendete Algorithmen \begin{itemize}
+        \item Run Length Encoding
+        \item Huffman Encoding
+        \item Move-to-Front Transform
+        \item Burrows Wheeler Transform
+    \end{itemize}
+\end{itemize}
 \vspace*{3cm}
 \section{Was ist eine Datenkompression?}
 Als Datenkompression wird ein Vorgang bezeichnet, bei dem Daten so verarbeitet werden, 
@@ -156,6 +169,7 @@ Außerdem gibt es eine Variante von Run-Length, die zum Beispiel nur Zeichenwied
 zusammenfasst, um die mögliche Verdopplung des Platzverbrauchs zu verhindern. 
 \textsf{abab}$\dots$ würde dann nicht verändert werden, da alle Zeichenwiederholungen die Länge 1 haben.
 So ist es aber nicht mehr einfach möglich, Counter von Zeichen zu unterscheiden.
+\newpage
 \subsection{Pseudocode}
 \subsubsection{Kodierung}
 \lstinputlisting{../presentation/pseudo/run-length.pseudo}
@@ -294,6 +308,10 @@ Die Invertierung der MTF ist trivial, da gilt
 \subsection{Implementierung}
 \subsubsection{Transformation, Inverse Transformation}
 \lstinputlisting{../presentation/pseudo/mtf.pseudo}
+\subsubsection{Implementationsüberlegungen}
+Da $A$ für Transformation und Inversion gleich sein muss, ist es effizienter, ein festes $A$ in der Spezifikation des Algorithmus festzulegen.
+
+Die Geschwindigkeit der Transformation wird dramatisch verbessert, wenn für $A$ eine Linked List verwendet wird.
 \newpage
 \section{Burrows-Wheeler transform}
 \subsection{Definitionen}
@@ -340,13 +358,16 @@ Nun lässt sich die Inversion von BWT folgendermaßen definieren.
 \begin{equation}
     w^{\text{BWT}^{-1}}:=(w_{\gamma(\$)},w_{\gamma(\gamma(\$)),..})^R
 \end{equation}
+Merke: es gilt $|w|=|w^{\text{BWT}^{-1}}|$
 \subsection{Implementierung}
 \subsubsection{Transformation}
 \lstinputlisting{../presentation/pseudo/bwt.pseudo}
 \subsubsection{Invers}
 \lstinputlisting{../presentation/pseudo/bwt-back.pseudo}
+\subsubsection{Implementationsüberlegungen}
+Suffix Arrays können in der Transformation in linearer Zeit konstruiert werden, um die Transformation letztendlich linear umzusetzen.
+
+Die Platz-Effizienz der Pseudocode Beispiele ist relativ schlecht. Statt ganze Matrizen zu speichern, können Pointer in die jeweiligen Strings verwendet werden.
 \newpage
-\section{Ergebnisse}
-\subsection{Einfluss der Schritte auf die Kompression}
 \printbibliography[heading=bibintoc]
 \end{document}
