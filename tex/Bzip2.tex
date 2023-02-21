@@ -285,28 +285,66 @@ Mithilfe von $t_{\text{MTF}}$ lässt sich MTF nun definieren.
     &w'=(w_2,..,w_k)^{\text{MTF}_{A'}}
 \end{split}
 \end{equation}
+\newpage
 \subsection{Inverse Transformation}
 Die Invertierung der MTF ist trivial, da gilt
 \begin{equation}
     \text{MTF}_A^{-1}=\text{MTF}_A
 \end{equation}
+\subsection{Implementierung}
+\subsubsection{Transformation, Inverse Transformation}
+\lstinputlisting{../presentation/pseudo/mtf.pseudo}
 \newpage
 \section{Burrows-Wheeler transform}
+\subsection{Definitionen}
+Sei $w\in\Sigma^*$ mit $|w|=n$. Wir definieren die $i$-te Rotation von $w$ für $1\leq i\leq n$ folgendermaßen.
+\begin{equation}
+    w^{\lambda_i}:=(w_i,..,w_n,w_1,..,w_{i-1})
+\end{equation}
+Die Menge aller Rotationen von $w$ sei
+\begin{equation}
+    w^\lambda:=\{w^{\lambda_i}:1\leq i\leq n\}\subset S_n
+\end{equation}
+Ferner sei die Rotation von $w$ des Ranges $k$
+\begin{equation}
+    w^{\Lambda_k}:=w^{\lambda_i},~\text{sodass}~|\{w^{\lambda_j}:w^{\lambda_j}\leq_l w^{\lambda_i},~1\leq i,j\leq n\}|=k
+\end{equation}
+In einer lexikographisch sortierten Liste von Rotationen ist $w^{\Lambda_k}$ der $k$-te Eintrag.
 \subsection{Erläuterung}
 BWT ist eine Transformation, welche die durchschnittliche Run-Length in der Eingabe erhöht. Dazu wird die lexikographische Rangfolge der Zeichen in betracht gezogen.
 \\[.5cm]
-Sei $w\in\Sigma^*$ mit $|w|=n$. Wir definieren die $i$-te Rotation von $w$ für $1\leq i\leq n$ folgendermaßen.
+BWT sei für eine Eingabe $w\in\Sigma^*$ definiert als
 \begin{equation}
-    w^{\gamma_i}:=(w_i,..,w_n,w_1,..,w_{i-1})
+\begin{split}
+    \text{BWT}:~&\Sigma^*\rightarrow(\Sigma\cup\{\$\})^*,\\
+    w^\text{BWT}:=~&(u^{\Lambda_1}_{n+1},..,u^{\Lambda_{n+1}}_{n+1})\\
+    \text{mit}~&u=w\circ\$
+\end{split}
 \end{equation}
-Ferner definieren wir die Menge aller Rotationen
-\begin{equation}
-    w^\gamma:=\{w^{\gamma_i}:1\leq i\leq n\}
-\end{equation}
-
-\subsubsection{Implementierung}
+Aus einer sortierten Liste von Rotationen der Eingabe wird die Ausgabe jeweils aus dem letzten Zeichen jeder Rotationen gebildet. Davor wird jedoch ein ''\$'' als Endzeichen an die Eingabe gehängt. Es gilt $\$\not\in\Sigma$.
 \subsection{Inverse Transformation}
-\subsubsection{Implementierung}
+Für die Invertierung einer Ausgabe $w\in\Sigma^*$ und dessen lexikograpisch sortierte Permutation $w'$ der Transformation wird zunächst eine Hilfspermutation definiert.
+\begin{equation}
+\begin{split}
+    \gamma:\mathbb{N}\rightarrow\mathbb{N},~w_{\gamma(x)}=w'_x
+\end{split}
+\end{equation}
+$\gamma$ bildet die Position eines Zeichens in $w$ auf dessen Position in $w'$ ab. Ein Zeichen wird also auf dessen neue Position abgebildet, nachdem $w$ sortiert wurde.
+
+Man beobachte: 
+\begin{equation}
+    \gamma~\text{besteht aus einem einzigen Zyklus der Länge}~n+1.
+\end{equation}
+\\[.5cm]
+Nun lässt sich die Inversion von BWT folgendermaßen definieren.
+\begin{equation}
+    w^{\text{BWT}^{-1}}:=(w_{\gamma(\$)},w_{\gamma(\gamma(\$)),..})^R
+\end{equation}
+\subsection{Implementierung}
+\subsubsection{Transformation}
+\lstinputlisting{../presentation/pseudo/bwt.pseudo}
+\subsubsection{Invers}
+\lstinputlisting{../presentation/pseudo/bwt-back.pseudo}
 \newpage
 \section{Ergebnisse}
 \subsection{Einfluss der Schritte auf die Kompression}

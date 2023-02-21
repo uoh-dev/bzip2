@@ -4,5 +4,6 @@ function mtf(input):
     for char in input:
         char_index $\leftarrow$ A.indexOf(char)
         out.append(char_index)
-        swap A[1] with A[char_index]
-    return A, out
+        delete A[char_index]
+        prepend(char, A)
+    return out
